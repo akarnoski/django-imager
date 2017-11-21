@@ -4,7 +4,10 @@ from django.contrib.auth.models import User
 
 class ImagerProfile(models.Model):
     """Create a new imager profile."""
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE)
+    active = ProfileManager()
     phone = models.CharField(max_length=11, blank=False)
     website = models.URLField()
     location = models.CharField(max_length=30, blank=False)
@@ -46,3 +49,12 @@ class ImagerProfile(models.Model):
         choices=PHOTO_STYLES,
         default='COLOR'
     )
+
+    @property
+    def is_active(self):
+        return self.user.is_active
+
+
+class ProfileManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(user__is_active=True)

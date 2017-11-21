@@ -1,21 +1,28 @@
-from django.db import models
+"""Models for imagersite."""
 from django.contrib.auth.models import User
+from django.db import models
+
+from multiselectfield import MultiSelectField
 
 
 class ProfileManager(models.Manager):
+    """Redefine profile manager settings."""
+
     def get_queryset(self):
+        """Redefine get_queryset is_active."""
         return super().get_queryset().filter(user__is_active=True)
 
 
 class ImagerProfile(models.Model):
     """Create a new imager profile."""
+
     user = models.OneToOneField(
         User,
         related_name='profile',
         on_delete=models.CASCADE)
     active = ProfileManager()
-    phone = models.CharField(max_length=11, blank=False)
-    website = models.URLField()
+    phone = models.CharField(max_length=12, blank=False)
+    website = models.URLField(blank=False)
     location = models.CharField(max_length=30, blank=False)
     fee = models.DecimalField(decimal_places=2, max_digits=6, blank=False)
     CAMERAS = [
@@ -24,10 +31,10 @@ class ImagerProfile(models.Model):
         ('SONY', 'Sony'),
         ('FUJIFILM', 'Fujifilm')
     ]
-    camera = models.CharField(
-        max_length=4,
+    camera = MultiSelectField(
+        max_choices=1,
         choices=CAMERAS,
-        default='CANON'
+        blank=True
     )
     SERVICES = [
         ('WEDDINGS', 'Weddings'),
@@ -38,26 +45,25 @@ class ImagerProfile(models.Model):
         ('ABSTACT', 'Abstract'),
         ('OTHER', 'Other')
     ]
-    services = models.CharField(
-        max_length=7,
+    services = MultiSelectField(
+        max_choices=7,
         choices=SERVICES,
-        default='OTHER'
+        blank=True
     )
-    bio = models.TextField()
+    bio = models.TextField(blank=True)
     PHOTO_STYLES = [
         ('BW', 'Black and white'),
         ('COLOR', 'Color'),
         ('STILL', 'Still'),
         ('ACTION', 'Action'),
     ]
-    photo_styles = models.CharField(
-        max_length=4,
+    photo_styles = MultiSelectField(
+        max_choices=4,
         choices=PHOTO_STYLES,
-        default='COLOR'
+        blank=True
     )
 
     @property
     def is_active(self):
+        """Create property is_active for model."""
         return self.user.is_active
-
-

@@ -71,6 +71,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'imagersite.wsgi.application'
 
+LOGIN_REDIRECT_URL = 'homepage'
+
+ACCOUNT_ACTIVATION_DAYS = 7
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases

@@ -12,17 +12,28 @@
 
     <!-- Bootstrap core CSS -->
     <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    {% load static %}
+    <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
+    {% load static %}
+    <link href="{% static '/css/bootstrap-grid.css' %}" rel="stylesheet">
+    {% load static %}
+    <link href="{% static '/css/bootstrap-reboot.css' %}" rel="stylesheet">
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
 
     <!-- Custom fonts for this template -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    {% load static %}
+    <link href="{% static '/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Custom styles for this template -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-agency/3.3.7/css/agency.css" rel="stylesheet">
+    {% load static %}
+    <link href="{% static '/css/agency.css' %}" rel="stylesheet">
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-agency/3.3.7/css/agency.css" rel="stylesheet"> -->
 
   </head>
 
@@ -125,7 +136,7 @@
                 </div>
               </div>
               {% load static %}
-                <img class="img-fluid" src="{% static 'imagersite/img/portfolio/01-thumbnail.jpg' %}" alt="My image"/>
+                <img class="img-fluid" src="{% static '/img/portfolio/01-thumbnail.jpg' %}" alt="My image"/>
               <!-- <img class="img-fluid" src="img/portfolio/01-thumbnail.jpg" alt=""> -->
             </a>
             <div class="portfolio-caption">
@@ -141,7 +152,7 @@
                 </div>
               </div>
               {% load static %}
-                <img class="img-fluid" src="{% static 'imagersite/img/portfolio/02-thumbnail.jpg' %}" alt="My image"/>
+                <img class="img-fluid" src="{% static '/img/portfolio/02-thumbnail.jpg' %}" alt="My image"/>
               <!-- <img class="img-fluid" src="img/portfolio/02-thumbnail.jpg" alt=""> -->
             </a>
             <div class="portfolio-caption">
@@ -157,7 +168,7 @@
                 </div>
               </div>
               {% load static %}
-                <img class="img-fluid" src="{% static 'imagersite/img/portfolio/03-thumbnail.jpg' %}" alt="My image"/>
+                <img class="img-fluid" src="{% static '/img/portfolio/03-thumbnail.jpg' %}" alt="My image"/>
               <!-- <img class="img-fluid" src="img/portfolio/03-thumbnail.jpg" alt=""> -->
             </a>
             <div class="portfolio-caption">
@@ -173,7 +184,7 @@
                 </div>
               </div>
               {% load static %}
-                <img class="img-fluid" src="{% static 'imagersite/img/portfolio/04-thumbnail.jpg' %}" alt="My image"/>
+                <img class="img-fluid" src="{% static '/img/portfolio/04-thumbnail.jpg' %}" alt="My image"/>
               <!-- <img class="img-fluid" src="img/portfolio/04-thumbnail.jpg" alt=""> -->
             </a>
             <div class="portfolio-caption">
@@ -189,7 +200,7 @@
                 </div>
               </div>
               {% load static %}
-                <img class="img-fluid" src="{% static 'imagersite/img/portfolio/05-thumbnail.jpg' %}" alt="My image"/>
+                <img class="img-fluid" src="{% static '/img/portfolio/05-thumbnail.jpg' %}" alt="My image"/>
               <!-- <img class="img-fluid" src="img/portfolio/05-thumbnail.jpg" alt=""> -->
             </a>
             <div class="portfolio-caption">
@@ -205,7 +216,7 @@
                 </div>
               </div>
               {% load static %}
-                <img class="img-fluid" src="{% static 'imagersite/img/portfolio/06-thumbnail.jpg' %}" alt="My image"/>
+                <img class="img-fluid" src="{% static '/img/portfolio/06-thumbnail.jpg' %}" alt="My image"/>
               <!-- <img class="img-fluid" src="img/portfolio/06-thumbnail.jpg" alt=""> -->
             </a>
             <div class="portfolio-caption">
@@ -232,7 +243,7 @@
               <li>
                 <div class="timeline-image">
                     {% load static %}
-                    <img class="rounded-circle img-fluid" src="{% static 'imagersite/img/about/1.jpg' %}" alt="My image"/>
+                    <img class="rounded-circle img-fluid" src="{% static '/img/about/1.jpg' %}" alt="My image"/>
                   <!-- <img class="rounded-circle img-fluid" src="img/about/1.jpg" alt=""> -->
                 </div>
                 <div class="timeline-panel">
@@ -248,7 +259,7 @@
               <li class="timeline-inverted">
                 <div class="timeline-image">
                     {% load static %}
-                    <img class="rounded-circle img-fluid" src="{% static 'imagersite/img/about/2.jpg' %}" alt="My image"/>
+                    <img class="rounded-circle img-fluid" src="{% static '/img/about/2.jpg' %}" alt="My image"/>
                   <!-- <img class="rounded-circle img-fluid" src="img/about/2.jpg" alt=""> -->
                 </div>
                 <div class="timeline-panel">
@@ -264,7 +275,7 @@
               <li>
                 <div class="timeline-image">
                     {% load static %}
-                    <img class="rounded-circle img-fluid" src="{% static 'imagersite/img/about/3.jpg' %}" alt="My image"/>
+                    <img class="rounded-circle img-fluid" src="{% static '/img/about/3.jpg' %}" alt="My image"/>
                   <!-- <img class="rounded-circle img-fluid" src="img/about/3.jpg" alt=""> -->
                 </div>
                 <div class="timeline-panel">
@@ -280,7 +291,7 @@
               <li class="timeline-inverted">
                 <div class="timeline-image">
                     {% load static %}
-                    <img class="rounded-circle img-fluid" src="{% static 'imagersite/img/about/4.jpg' %}" alt="My image"/>
+                    <img class="rounded-circle img-fluid" src="{% static '/img/about/4.jpg' %}" alt="My image"/>
                   <!-- <img class="rounded-circle img-fluid" src="img/about/4.jpg" alt=""> -->
                 </div>
                 <div class="timeline-panel">
@@ -319,7 +330,7 @@
           <div class="col-sm-4">
             <div class="team-member">
                 {% load static %}
-                    <img class="mx-auto rounded-circle" src="{% static 'imagersite/img/team/1.jpg' %}" alt="My image"/>
+                    <img class="mx-auto rounded-circle" src="{% static '/img/team/1.jpg' %}" alt="My image"/>
               <!-- <img class="mx-auto rounded-circle" src="img/team/1.jpg" alt=""> -->
               <h4>Kay Garland</h4>
               <p class="text-muted">Lead Designer</p>
@@ -345,7 +356,7 @@
           <div class="col-sm-4">
             <div class="team-member">
                 {% load static %}
-                    <img class="mx-auto rounded-circle" src="{% static 'imagersite/img/team/2.jpg' %}" alt="My image"/>
+                    <img class="mx-auto rounded-circle" src="{% static '/img/team/2.jpg' %}" alt="My image"/>
               <!-- <img class="mx-auto rounded-circle" src="img/team/2.jpg" alt=""> -->
               <h4>Larry Parker</h4>
               <p class="text-muted">Lead Marketer</p>
@@ -371,7 +382,7 @@
           <div class="col-sm-4">
             <div class="team-member">
                 {% load static %}
-                    <img class="mx-auto rounded-circle" src="{% static 'imagersite/img/team/3.jpg' %}" alt="My image"/>
+                    <img class="mx-auto rounded-circle" src="{% static '/img/team/3.jpg' %}" alt="My image"/>
               <!-- <img class="mx-auto rounded-circle" src="img/team/3.jpg" alt=""> -->
               <h4>Diana Pertersen</h4>
               <p class="text-muted">Lead Developer</p>
@@ -410,28 +421,28 @@
           <div class="col-md-3 col-sm-6">
             <a href="#">
                 {% load static %}
-                    <img class="img-fluid d-block mx-auto" src="{% static 'imagersite/img/logos/envato.jpg' %}" alt="My image"/>
+                    <img class="img-fluid d-block mx-auto" src="{% static '/img/logos/envato.jpg' %}" alt="My image"/>
               <!-- <img class="img-fluid d-block mx-auto" src="img/logos/envato.jpg" alt=""> -->
             </a>
           </div>
           <div class="col-md-3 col-sm-6">
             <a href="#">
                 {% load static %}
-                    <img class="img-fluid d-block mx-auto" src="{% static 'imagersite/img/logos/designmodo.jpg' %}" alt="My image"/>
+                    <img class="img-fluid d-block mx-auto" src="{% static '/img/logos/designmodo.jpg' %}" alt="My image"/>
               <!-- <img class="img-fluid d-block mx-auto" src="img/logos/designmodo.jpg" alt=""> -->
             </a>
           </div>
           <div class="col-md-3 col-sm-6">
             <a href="#">
                 {% load static %}
-                    <img class="img-fluid d-block mx-auto" src="{% static 'imagersite/img/logos/themeforest.jpg' %}" alt="My image"/>
+                    <img class="img-fluid d-block mx-auto" src="{% static '/img/logos/themeforest.jpg' %}" alt="My image"/>
               <!-- <img class="img-fluid d-block mx-auto" src="img/logos/themeforest.jpg" alt=""> -->
             </a>
           </div>
           <div class="col-md-3 col-sm-6">
             <a href="#">
                 {% load static %}
-                    <img class="img-fluid d-block mx-auto" src="{% static 'imagersite/img/logos/creative-market.jpg' %}" alt="My image"/>
+                    <img class="img-fluid d-block mx-auto" src="{% static '/img/logos/creative-market.jpg' %}" alt="My image"/>
               <!-- <img class="img-fluid d-block mx-auto" src="img/logos/creative-market.jpg" alt=""> -->
             </a>
           </div>
@@ -543,7 +554,7 @@
                   <h2>Project Name</h2>
                   <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                   {% load static %}
-                    <img class="img-fluid d-block mx-auto" src="{% static 'imagersite/img/portfolio/01-full.jpg' %}" alt="My image"/>
+                    <img class="img-fluid d-block mx-auto" src="{% static '/img/portfolio/01-full.jpg' %}" alt="My image"/>
                   <!-- <img class="img-fluid d-block mx-auto" src="img/portfolio/01-full.jpg" alt=""> -->
                   <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                   <ul class="list-inline">
@@ -579,7 +590,7 @@
                   <h2>Project Name</h2>
                   <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                   {% load static %}
-                    <img class="img-fluid d-block mx-auto" src="{% static 'imagersite/img/portfolio/02-full.jpg' %}" alt="My image"/>
+                    <img class="img-fluid d-block mx-auto" src="{% static '/img/portfolio/02-full.jpg' %}" alt="My image"/>
                   <!-- <img class="img-fluid d-block mx-auto" src="img/portfolio/02-full.jpg" alt=""> -->
                   <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                   <ul class="list-inline">
@@ -615,7 +626,7 @@
                   <h2>Project Name</h2>
                   <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                   {% load static %}
-                    <img class="img-fluid d-block mx-auto" src="{% static 'imagersite/img/portfolio/03-full.jpg' %}" alt="My image"/>
+                    <img class="img-fluid d-block mx-auto" src="{% static '/img/portfolio/03-full.jpg' %}" alt="My image"/>
                   <!-- <img class="img-fluid d-block mx-auto" src="img/portfolio/03-full.jpg" alt=""> -->
                   <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                   <ul class="list-inline">
@@ -651,7 +662,7 @@
                   <h2>Project Name</h2>
                   <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                   {% load static %}
-                    <img class="img-fluid d-block mx-auto" src="{% static 'imagersite/img/portfolio/04-full.jpg' %}" alt="My image"/>
+                    <img class="img-fluid d-block mx-auto" src="{% static '/img/portfolio/04-full.jpg' %}" alt="My image"/>
                   <!-- <img class="img-fluid d-block mx-auto" src="img/portfolio/04-full.jpg" alt=""> -->
                   <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                   <ul class="list-inline">
@@ -687,7 +698,7 @@
                   <h2>Project Name</h2>
                   <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                   {% load static %}
-                    <img class="img-fluid d-block mx-auto" src="{% static 'imagersite/img/portfolio/05-full.jpg' %}" alt="My image"/>
+                    <img class="img-fluid d-block mx-auto" src="{% static '/img/portfolio/05-full.jpg' %}" alt="My image"/>
                   <!-- <img class="img-fluid d-block mx-auto" src="img/portfolio/05-full.jpg" alt=""> -->
                   <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                   <ul class="list-inline">
@@ -723,7 +734,7 @@
                   <h2>Project Name</h2>
                   <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                   {% load static %}
-                    <img class="img-fluid d-block mx-auto" src="{% static 'imagersite/img/portfolio/06-full.jpg' %}" alt="My image"/>
+                    <img class="img-fluid d-block mx-auto" src="{% static '/img/portfolio/06-full.jpg' %}" alt="My image"/>
                   <!-- <img class="img-fluid d-block mx-auto" src="img/portfolio/06-full.jpg" alt=""> -->
                   <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                   <ul class="list-inline">
@@ -743,11 +754,23 @@
     </div>
 
     <!-- Bootstrap core JavaScript -->
+    {% load static %}
+    <link href="{% static '/js/jquery.min.js' %}">
     <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
+    {% load static %}
+    <link href="{% static '/js/popper.min.js' %}">
+    {% load static %}
+    <link href="{% static '/js/contact_me.js' %}">
+    {% load static %}
+    <link href="{% static '/js/bootstrap.min.js' %}">
+    {% load static %}
+    <link href="{% static '/js/jquery.easing.js' %}">
+    {% load static %}
+    <link href="{% static '/js/jqBootstrapValidation.js' %}">
     <!-- <script src="vendor/popper/popper.min.js"></script> -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 
     <!-- Plugin JavaScript -->
     <!-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> -->
@@ -757,7 +780,9 @@
     <!-- <script src="js/contact_me.js"></script> -->
 
     <!-- Custom scripts for this template -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-agency/3.3.7/js/agency.min.js"></script>
+    {% load static %}
+    <link href="{% static '/js/agency.js' %}">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-agency/3.3.7/js/agency.min.js"></script> -->
 
   </body>
 

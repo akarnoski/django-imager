@@ -8,22 +8,22 @@ from multiselectfield import MultiSelectField
 class Photo(models.Model):
     """Create new photo model."""
 
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         ImagerProfile,
         related_name='photo')
-    docfile = models.FileField(upload_to='documents/%Y/%m/%d')
-    title = models.CharField(max_length=30, blank=False)
+    docfile = models.ImageField(upload_to='documents/%Y/%m/%d')
+    title = models.CharField(max_length=30)
     description = models.TextField(blank=True)
     date_uploaded = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    date_published = models.DateTimeField(auto_now_add=True)
+    date_published = models.DateTimeField()
     PUBLISHED = [
         ('PRIVATE', 'Private'),
         ('SHARED', 'Shared'),
         ('PUBLIC', 'Public'),
     ]
-    published = MultiSelectField(
-        max_choices=1,
+    published = models.CharField(
+        max_length=10,
         choices=PUBLISHED,
         blank=True
     )
@@ -32,7 +32,7 @@ class Photo(models.Model):
 class Album(models.Model):
     """Create new album model."""
 
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         ImagerProfile,
         related_name='album')
     photo = models.ManyToManyField(Photo)
@@ -40,14 +40,14 @@ class Album(models.Model):
     description = models.TextField(blank=True)
     date_uploaded = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    date_published = models.DateTimeField(auto_now_add=True)
+    date_published = models.DateTimeField()
     PUBLISHED = [
         ('PRIVATE', 'Private'),
         ('SHARED', 'Shared'),
         ('PUBLIC', 'Public'),
     ]
-    published = MultiSelectField(
-        max_choices=1,
+    published = CharField(
+        max_length=10,
         choices=PUBLISHED,
         blank=True
     )

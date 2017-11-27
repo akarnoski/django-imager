@@ -1,7 +1,8 @@
 """Models for imagersite."""
 from django.contrib.auth.models import User
 from django.db import models
-
+from django.db.models.signals import post_save
+from django.dispatch import reciever
 from multiselectfield import MultiSelectField
 
 
@@ -67,3 +68,7 @@ class ImagerProfile(models.Model):
     def is_active(self):
         """Create property is_active for model."""
         return self.user.is_active
+
+
+@reciever(post_save, sender=User)
+def create_profile(sender, **kwargs):

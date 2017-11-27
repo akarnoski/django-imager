@@ -25,11 +25,5 @@ from imagersite import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home_view, name='homepage'),
-    url(r'^accounts/register/$',
-        RegistrationView.as_view(
-            form_class=MyCustomUserForm
-        ),
-        name='registration_register',
-    ),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
 ]

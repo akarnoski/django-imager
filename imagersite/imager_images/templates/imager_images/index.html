@@ -1,0 +1,21 @@
+{% extends 'imagersite/base.html' %}
+
+{% block title %}Upload{% endblock %}
+
+{% block content %}
+    {% if documents %}
+        <ul>
+        {% for document in documents %}
+            <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+        <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                {{ field.label_tag }} {{ field }}
+            {% endfor %}
+            <input type="submit" value="Submit" />
+        </form>
+{% endblock %}

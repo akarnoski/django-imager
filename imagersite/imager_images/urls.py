@@ -6,4 +6,4 @@ from imager_images import views
 
 urlpatterns = [
     url(r'^upload$', views.upload_view, name='upload'),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]

@@ -46,7 +46,7 @@ class Album(models.Model):
         ('SHARED', 'Shared'),
         ('PUBLIC', 'Public'),
     ]
-    published = CharField(
+    published = models.CharField(
         max_length=10,
         choices=PUBLISHED,
         blank=True

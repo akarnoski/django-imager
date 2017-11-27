@@ -75,6 +75,8 @@ LOGIN_REDIRECT_URL = 'homepage'
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 

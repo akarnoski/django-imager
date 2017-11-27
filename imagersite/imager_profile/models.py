@@ -21,8 +21,6 @@ class ImagerProfile(models.Model):
         related_name='profile',
         on_delete=models.CASCADE)
     active = ProfileManager()
-    email = models.CharField(max_length=100, blank=True)
-    USERNAME_FIELD = 'email'
     phone = models.CharField(max_length=12, blank=False)
     website = models.URLField(blank=False)
     location = models.CharField(max_length=30, blank=False)
@@ -69,13 +67,3 @@ class ImagerProfile(models.Model):
     def is_active(self):
         """Create property is_active for model."""
         return self.user.is_active
-
-    @property
-    def username(self):
-        """Create username property."""
-        return getattr(self, self.USERNAME_FIELD)
-
-    @username.setter
-    def set_username(self, value):
-        """Create a setter for username."""
-        self.email = value

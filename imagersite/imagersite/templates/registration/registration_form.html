@@ -4,8 +4,11 @@
 
 {% block content %}
     <h2>Login</h2>
-        <form action="/your-name/" method="post">
-            <label for="username">Your name: </label>
+        <form action="" method="post">
+              {% csrf_token %}
+              {{ form.as_p }}
+
+          <!--   <label for="username">Your name: </label>
             <input id="username" type="text" name="username" value="{{ username }}">
             <label for="phone">Your phone #: </label>
             <input id="your_phone" type="text" name="phone" value="{{ phone }}">
@@ -43,7 +46,7 @@
             </select>
             <label for="fee">Your bio: </label>
             <textarea name="bio"></textarea>
-
+ -->
 
             <input type="submit" value="Submit">
         </form>

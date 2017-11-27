@@ -1,4 +1,3 @@
-from registration.forms import RegistrationForm
 from imager_profile.models import ImagerProfile
 
 

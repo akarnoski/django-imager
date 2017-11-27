@@ -4,11 +4,16 @@
 
 {% block content %}
     <h2>Login</h2>
-        <form action="/your-name/" method="post">
-            <label for="username">Your name: </label>
+        <form action="" method="post">
+              {% csrf_token %}
+              {{ form.as_p }}
+
+          <!--   <label for="username">Your name: </label>
             <input id="username" type="text" name="username" value="{{ username }}">
             <label for="phone">Your phone #: </label>
             <input id="your_phone" type="text" name="phone" value="{{ phone }}">
+            <label for="email">Your email: </label>
+            <input id="email" type="text" name="email" value="{{ email }}">
             <label for="website">Your website: </label>
             <input id="website" type="text" name="website" value="{{ website }}">
             <label for="location">Your city/state: </label>
@@ -41,8 +46,8 @@
             </select>
             <label for="fee">Your bio: </label>
             <textarea name="bio"></textarea>
+ -->
 
-
-            <input type="submit" value="OK">
+            <input type="submit" value="Submit">
         </form>
 {% endblock %}

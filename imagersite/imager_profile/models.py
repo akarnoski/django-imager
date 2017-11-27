@@ -21,7 +21,10 @@ class ImagerProfile(models.Model):
         User,
         related_name='profile',
         on_delete=models.CASCADE)
+
+    objects = models.ModelManager()
     active = ProfileManager()
+
     phone = models.CharField(max_length=12, blank=False)
     website = models.URLField(blank=False)
     location = models.CharField(max_length=30, blank=False)
@@ -72,3 +75,5 @@ class ImagerProfile(models.Model):
 
 @reciever(post_save, sender=User)
 def create_profile(sender, **kwargs):
+    if kwargs['created']:
+        profile = ImagerProfile(user=kwargs['instance'], fee=)

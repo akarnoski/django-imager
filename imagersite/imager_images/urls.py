@@ -7,4 +7,6 @@ from imager_images import views
 urlpatterns = [
     url(r'^upload$', views.upload_view, name='upload'),
     url(r'^album$', views.album_view, name='album'),
+    url(r'^library', views.library_view, name='library'),
+
 ]

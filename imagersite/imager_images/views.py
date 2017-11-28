@@ -42,3 +42,8 @@ def album_view(request):
         'imager_images/album.html',
         context={'form': form}
     )
+
+
+def library_view(request):
+    """Callable view for the libraaries."""
+    return render(request, 'imagersite/library.html')

@@ -17,12 +17,13 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
-
 from imagersite import views
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home_view, name='homepage'),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^images/', include('imager_images.urls')),
+    url(r'^profile/', include('imager_profile.urls')),
 ]

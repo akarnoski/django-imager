@@ -73,6 +73,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'imagersite.wsgi.application'
 
 LOGIN_REDIRECT_URL = 'homepage'
+LOGOUT_REDIRECT_URL = 'homepage'
 
 ACCOUNT_ACTIVATION_DAYS = 7
 

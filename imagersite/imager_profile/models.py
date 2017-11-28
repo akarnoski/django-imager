@@ -28,7 +28,7 @@ class ImagerProfile(models.Model):
     phone = models.CharField(max_length=12, blank=False)
     website = models.URLField(blank=False)
     location = models.CharField(max_length=30, blank=False)
-    fee = models.DecimalField(decimal_places=2, max_digits=6, blank=True, null=False)
+    fee = models.DecimalField(decimal_places=2, max_digits=6, blank=True, null=True)
     CAMERAS = [
         ('CANON', 'Canon'),
         ('NIKON', 'Nikon'),
@@ -77,3 +77,4 @@ class ImagerProfile(models.Model):
 def create_profile(sender, **kwargs):
     if kwargs['created']:
         profile = ImagerProfile(user=kwargs['instance'])
+        profile.save()

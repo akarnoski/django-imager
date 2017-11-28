@@ -328,3 +328,29 @@ template {
   display: none !important;
 }
 /*# sourceMappingURL=bootstrap-reboot.css.map */
+
+.intro-text form p span {
+  display: block;
+  padding-bottom: 10px;
+}
+
+.intro-text form ul{
+  list-style: none;
+}
+
+.intro-text form [type=text]{
+  width: 45%;
+}
+
+.intro-text form [type=email]{
+  width: 45%;
+}
+
+.intro-text form [type=password]{
+  width: 45%;
+}
+
+.register-form {
+  text-align: right;
+  padding-right: 30%;
+}

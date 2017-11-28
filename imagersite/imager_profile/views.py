@@ -13,4 +13,4 @@ def profile_view(request, username=None):
     if request.user.is_authenticated:
         request_user = User.objects.filter(username=request.user)
         profile = ImagerProfile.objects.get(user=request_user)
-        return render(request, 'imagersite/profiles.html', context={'username': profile})
+        return render(request, 'imagersite/profiles.html', context={'profile': profile})

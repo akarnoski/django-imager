@@ -28,8 +28,9 @@
                 {% load static %}
                     <img class="mx-auto rounded-circle" src="{% static '/img/team/1.jpg' %}" alt="My image"/>
               <!-- <img class="mx-auto rounded-circle" src="img/team/1.jpg" alt=""> -->
-              <h4>{% profile.user %}</h4>
-              <p class="text-muted">Some text</p>
+              <h4>{{ profile.user }}</h4>
+              <p class="text-muted">{{ profile.website }}</p>
+              <p class="text-muted">{{ profile.location }}</p>
               <ul class="list-inline social-buttons">
                 <li class="list-inline-item">
                   <a href="#">

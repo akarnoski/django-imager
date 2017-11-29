@@ -46,10 +46,11 @@ def album_view(request):
 
 def library_view(request):
     """Callable view for the libraaries."""
-    param_value = request.GET('username')
+    # param_value = request.GET('username')
     return render(request, 'imager_images/library.html')
 
 
 def photo_view(request, number=None):
     """Callable view for the libraaries."""
-    return render(request, 'imager_images/photo.html', context={'photo_id': number})
+    return render(request, 'imager_images/photo.html',
+                  context={'photo_id': number})

@@ -1,0 +1,97 @@
+{% extends 'imagersite/base.html' %}
+
+ {% block nav %} {% include "imager_profile/nav.html" %} {% endblock nav %}
+
+{% block content %}
+
+
+    <header class="masthead">
+      <div class="container">
+        <div class="intro-text">
+          <div class="intro-heading">
+            <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>
+          </div>       
+          <p>{{ profile.bio }}</p>
+        </div>
+      </div>
+    </header>
+    <!-- Portfolio Grid -->
+    <!-- Stats -->
+    <section class="bg-light" id="team">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <ul class="list-inline social-buttons">
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fa fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fa fa-linkedin"></i>
+                  </a>
+                </li>
+              </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="team-member">
+                {% load static %}
+              <h4>Personal Information</h4>
+              <p class="text-muted"><strong>FULL NAME: </strong>{{ profile.first_name }} {{ profile.last_name }}</p>
+              <p class="text-muted"><strong>USERNAME: </strong>{{ profile.user }}</p>
+              <p class="text-muted"><strong>STANDARD FEE: </strong>{{ profile.fee }}</p>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="team-member">
+                {% load static %}
+              <h4>Contact</h4>
+              <p class="text-muted"><strong>PHONE: </strong>{{ profile.phone }}</p>
+              <p class="text-muted"><strong>WEBSITE: </strong>{{ profile.website }}</p>
+              <p class="text-muted"><strong>LOCATION: </strong>{{ profile.location }}</p>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="team-member">
+                {% load static %}
+              <h4>WORK</h4>
+              <p class="text-muted"><strong>SERVICES: </strong>{{ profile.services }}</p>
+              <p class="text-muted"><strong>STYLES: </strong>{{ profile.photo_styles }}</p>
+              <p class="text-muted"><strong>CAMERA: </strong>{{ profile.camera }}</p>
+            </div>
+          </div>
+        </div>
+        {% if request.user.username == profile.user.username %}
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <p>Your personal settings</p>
+            <ul class="list-inline social-buttons">
+                <li class="list-inline-item">
+                  IMAGE COUNT: {{ image_count }}
+                </li>
+                <li class="list-inline-item">
+                  EDIT PROFILE: 'link to profile form'
+                </li>
+                <li class="list-inline-item">
+                  UPLOAD PHOTOS: 'link to photo form'
+                </li>
+                <li class="list-inline-item">
+                  EDIT ALBUMS: 'link to album form'
+                </li>
+              </ul>
+          </div>
+        </div>
+    {% endif %}
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

@@ -10,7 +10,13 @@ from imager_images.forms import AlbumForm, DocumentForm
 
 
 def profile_view(request, username=None):
-    if request.user.is_authenticated:
+    if username is None and request.user.is_authenticated:
         request_user = User.objects.filter(username=request.user)
         profile = ImagerProfile.objects.get(user=request_user)
-        return render(request, 'imagersite/profiles.html', context={'profile': profile})
+        image_query = Photo.objects.filter(user=profile)
+        image_count = image_query.count()
+        return render(request, 'imager_profile/profiles.html', context={'profile': profile, 'image_count': image_count})
+    else:
+        request_user = User.objects.filter(username=username)
+        profile = ImagerProfile.objects.get(user=request_user)
+        return render(request, 'imager_profile/profiles.html', context={'profile': profile})

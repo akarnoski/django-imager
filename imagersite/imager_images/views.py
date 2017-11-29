@@ -16,14 +16,14 @@ def upload_view(request):
             post.user = request.user
             post.published_date = timezone.now()
             post.save()
-            return HttpResponseRedirect(reverse('imager_images.views.upload_view'))
+            return HttpResponseRedirect(reverse('upload_view', current_app='imager_images', args=()))
     else:
         form = DocumentForm()
     documents = Photo.objects.all()
 
     return render(
         request,
-        'imager_images/index.html',
+        'imager_images/upload.html',
         context={'documents': documents, 'form': form}
     )
 
@@ -46,4 +46,10 @@ def album_view(request):
 
 def library_view(request):
     """Callable view for the libraaries."""
-    return render(request, 'imagersite/library.html')
+    param_value = request.GET('username')
+    return render(request, 'imager_images/library.html')
+
+
+def photo_view(request, number=None):
+    """Callable view for the libraaries."""
+    return render(request, 'imager_images/photo.html', context={'photo_id': number})

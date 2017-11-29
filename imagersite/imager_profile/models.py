@@ -24,7 +24,9 @@ class ImagerProfile(models.Model):
 
     objects = models.Manager()
     active = ProfileManager()
-
+    
+    first_name = models.CharField(max_length=30, blank=False)
+    last_name = models.CharField(max_length=30, blank=False)
     phone = models.CharField(max_length=12, blank=False)
     website = models.URLField(blank=False)
     location = models.CharField(max_length=30, blank=False)

@@ -9,18 +9,10 @@ from imager_images.forms import DocumentForm, AlbumForm
 
 def album_view(request):
     """View to create albums."""
-    if request.method == 'POST':
-        form = AlbumForm(request.POST)
-        if form.is_valid():
-            return HttpResponseRedirect(reverse('imager_images.views.album_view'))
+    if number is None:
+        return render(request, 'imager_images/album.html')
     else:
-        form = AlbumForm()
-
-    return render(
-        request,
-        'imager_images/album.html',
-        context={'form': form}
-    )
+        return render(request, 'imager_images/album.html', context={'photo_id': number})
 
 
 def library_view(request):

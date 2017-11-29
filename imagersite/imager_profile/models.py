@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
 from multiselectfield import MultiSelectField
 
 
@@ -30,7 +31,8 @@ class ImagerProfile(models.Model):
     phone = models.CharField(max_length=12, blank=False)
     website = models.URLField(blank=False)
     location = models.CharField(max_length=30, blank=False)
-    fee = models.DecimalField(decimal_places=2, max_digits=6, blank=True, null=True)
+    fee = models.DecimalField(decimal_places=2, max_digits=6,
+                              blank=True, null=True)
     CAMERAS = [
         ('CANON', 'Canon'),
         ('NIKON', 'Nikon'),
@@ -77,6 +79,7 @@ class ImagerProfile(models.Model):
 
 @receiver(post_save, sender=User)
 def create_profile(sender, **kwargs):
+    """Automatically create profile when user is created."""
     if kwargs['created']:
         profile = ImagerProfile(user=kwargs['instance'])
         profile.save()

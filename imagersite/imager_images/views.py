@@ -41,3 +41,13 @@ def photo_view(request, number=None):
         return render(request, 'imager_images/photo.html')
     else:
         return render(request, 'imager_images/photo.html', context={'photo_id': number})
+
+
+class PhotoListView(ListView):
+    """Class to display the photo list view."""
+    context_object_name = 'photos'
+    template_name = 'imager_images/photo.html'
+
+    def get_queryset(self):
+        profile = ImagerProfile.objects.get(user=self.request.user)
+        return Photo.objects.filter(user=profile)

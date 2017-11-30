@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from imager_images.views import AlbumView
 
 from imager_images import views
+from imager_images.views import PhotoListView
 
 app_name = 'imager_images'
 urlpatterns = [

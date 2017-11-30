@@ -25,7 +25,6 @@ class ImagerProfile(models.Model):
 
     objects = models.Manager()
     active = ProfileManager()
-    
     first_name = models.CharField(max_length=30, blank=False)
     last_name = models.CharField(max_length=30, blank=False)
     phone = models.CharField(max_length=12, blank=False)
@@ -75,6 +74,10 @@ class ImagerProfile(models.Model):
     def is_active(self):
         """Create property is_active for model."""
         return self.user.is_active
+
+    def __repr__(self):
+        """Make me a string."""
+        return self.user.username
 
 
 @receiver(post_save, sender=User)

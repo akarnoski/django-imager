@@ -36,6 +36,7 @@ class Album(models.Model):
         ImagerProfile,
         related_name='album')
     photo = models.ManyToManyField(Photo)
+    cover = models.ImageField(upload_to='cover-image')
     title = models.CharField(max_length=30, blank=False)
     description = models.TextField(blank=True)
     date_uploaded = models.DateTimeField(auto_now_add=True)

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 
 from imager_images.models import Album, ImagerProfile, Photo
 from imager_images.forms import DocumentForm, AlbumForm
@@ -20,6 +20,24 @@ class AlbumView(ListView):
         user = ImagerProfile.objects.get(user=self.request.user)
         return Album.objects.filter(user=user)
 
+
+class AlbumPhotoView(DetailView):
+    """Display album for user."""
+
+    model = Album
+    context_object_name = 'photo'
+    template_name = 'imager_images/albumphoto.html'
+
+    def get_context_data(self, **kwargs):
+        photo = kwargs['object'].photo.filter(album=kwargs['object'].pk)
+        context = super().get_context_data(**kwargs)
+        context['photo'] = photo
+        return context
+
+    # def get_queryset(self):
+    #     """Request users profile."""
+    #     user = ImagerProfile.objects.get(user=self.request.user)
+    #     return Album.objects.filter(user=user)
 
 # def album_view(request):
 #     """View to create albums."""

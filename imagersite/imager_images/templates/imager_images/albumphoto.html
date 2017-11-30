@@ -27,22 +27,22 @@
 
 {# template for each library album #}
 
-{% for album in albums %}
+{% for img in photo %}
 
 
           <div class="col-md-4 col-sm-6 portfolio-item">
-            <a class="portfolio-link" data-toggle="modal" href="album/{{ album.id }}">
+            <a class="portfolio-link" data-toggle="modal" href="#">
               <div class="portfolio-hover">
                 <div class="portfolio-hover-content">
                   <i class="fa fa-plus fa-3x"></i>
                 </div>
               </div>
               {% load static %}
-                <img class="img-fluid" src="{{ album.cover.url }}" alt="My image"/>
+                <img class="img-fluid" src="{{ img.docfile.url }}" alt="My image"/>
             </a>
             <div class="portfolio-caption">
-              <h4>{{ album.title }}</h4>
-              <p class="text-muted">{{ album.description }}</p>
+              <h4>{{ img.title }}</h4>
+              <p class="text-muted">{{ img.description }}</p>
             </div>
           </div>
 

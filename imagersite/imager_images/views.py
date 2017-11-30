@@ -17,8 +17,9 @@ class AlbumView(ListView):
 
     def get_queryset(self):
         """Request users profile."""
-        user = ImagerProfile.objects.get(user=self.request.user)
-        return Album.objects.filter(user=user)
+        # user = ImagerProfile.objects.get(user=self.request.user)
+        # return Album.objects.filter(user=user)
+        return Album.objects.all()
 
 
 class AlbumPhotoView(DetailView):
@@ -33,18 +34,6 @@ class AlbumPhotoView(DetailView):
         context = super().get_context_data(**kwargs)
         context['photo'] = photo
         return context
-
-    # def get_queryset(self):
-    #     """Request users profile."""
-    #     user = ImagerProfile.objects.get(user=self.request.user)
-    #     return Album.objects.filter(user=user)
-
-# def album_view(request):
-#     """View to create albums."""
-#     if number is None:
-#         return render(request, 'imager_images/album.html')
-#     else:
-#         return render(request, 'imager_images/album.html', context={'photo_id': number})
 
 
 def library_view(request):

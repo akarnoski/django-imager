@@ -28,10 +28,10 @@
 {# template for each library album #}
 
 {% for album in albums %}
-
+{% if request.user.is_authenticated and album.published == 'PUBLIC' %}
 
           <div class="col-md-4 col-sm-6 portfolio-item">
-            <a class="portfolio-link" data-toggle="modal" href="album/{{ album.id }}">
+            <a class="portfolio-link" href="album/{{ album.id }}">
               <div class="portfolio-hover">
                 <div class="portfolio-hover-content">
                   <i class="fa fa-plus fa-3x"></i>
@@ -46,6 +46,7 @@
             </div>
           </div>
 
+{% endif %}
 {% endfor %}
 
         </div>

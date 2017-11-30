@@ -11,7 +11,7 @@ class Photo(models.Model):
     user = models.ForeignKey(
         ImagerProfile,
         related_name='photo')
-    docfile = models.ImageField(upload_to='documents/%Y/%m/%d')
+    docfile = models.ImageField(upload_to='images')
     title = models.CharField(max_length=30)
     description = models.TextField(blank=True)
     date_uploaded = models.DateTimeField(auto_now_add=True)

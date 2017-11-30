@@ -17,16 +17,8 @@ def album_view(request):
 
 def library_view(request):
     """Callable view for the libraaries."""
-    # param_value = request.GET('username')
-    return render(request, 'imager_images/library.html')
-
-
-def photo_view(request, number=None):
-    """Callable view for the libraaries."""
-    if number is None:
-        return render(request, 'imager_images/photo.html')
-    else:
-        return render(request, 'imager_images/photo.html', context={'photo_id': number})
+    photos = Photo.objects.all().filter(published='PUBLIC').order_by('-date_uploaded')
+    return render(request, 'imager_images/library.html', context={'photos': photos})
 
 
 class PhotoListView(ListView):
@@ -35,5 +27,6 @@ class PhotoListView(ListView):
     template_name = 'imager_images/photo.html'
 
     def get_queryset(self):
-        profile = ImagerProfile.objects.get(user=self.request.user)
-        return Photo.objects.filter(user=profile)
+        # profile = ImagerProfile.objects.get(user=self.request.user)
+        # return Photo.objects.filter(user=profile)
+        return Photo.objects.all().filter(published='PUBLIC').order_by('-date_uploaded')

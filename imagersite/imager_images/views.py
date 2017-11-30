@@ -1,18 +1,39 @@
 from django.shortcuts import render
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
-from django.views.generic.list import ListView
+from django.core.urlresolvers import reverse
+from django.views.generic import DetailView, ListView
 
-from imager_images.models import Photo
-from imager_profile.models import ImagerProfile
+from imager_images.models import Album, ImagerProfile, Photo
+from imager_images.forms import DocumentForm, AlbumForm
 
 
-def album_view(request):
-    """View to create albums."""
-    if number is None:
-        return render(request, 'imager_images/album.html')
-    else:
-        return render(request, 'imager_images/album.html', context={'photo_id': number})
+class AlbumView(ListView):
+    """Display album for user."""
+
+    model = Album
+    context_object_name = 'albums'
+    template_name = 'imager_images/album.html'
+
+    def get_queryset(self):
+        """Request users profile."""
+        # user = ImagerProfile.objects.get(user=self.request.user)
+        # return Album.objects.filter(user=user)
+        return Album.objects.all()
+
+
+class AlbumPhotoView(DetailView):
+    """Display album for user."""
+
+    model = Album
+    context_object_name = 'photo'
+    template_name = 'imager_images/albumphoto.html'
+
+    def get_context_data(self, **kwargs):
+        photo = kwargs['object'].photo.filter(album=kwargs['object'].pk)
+        context = super().get_context_data(**kwargs)
+        context['photo'] = photo
+        return context
 
 
 def library_view(request):

@@ -1,5 +1,9 @@
 {% extends 'imagersite/base.html' %}
 
+{% if request.user.is_authenticated %}
+  {% block nav %} {% include "imager_profile/nav.html" %} {% endblock nav %}
+{% endif %}
+
 {% block content %}
 
     <header class="masthead">

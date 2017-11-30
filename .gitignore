@@ -103,3 +103,6 @@ ENV/
 node_modules
 package-lock.json
 .DS_Store
+
+MEDIA
+!MEDIA/.gitkeep

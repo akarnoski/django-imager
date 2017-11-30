@@ -8,9 +8,8 @@ from imager_images.views import PhotoListView
 
 app_name = 'imager_images'
 urlpatterns = [
-    url(r'^photos', views.photo_view, name='photo'),
-    url(r'^photos/(?P<number>\d+)', views.photo_view, name='photo'),
     url(r'^album$', AlbumView.as_view(), name='album'),
     url(r'^album/(?P<pk>\d+)', AlbumPhotoView.as_view(), name='albumphoto'),
+    url(r'^photos', PhotoListView.as_view(), name='photo'),
     url(r'^library', views.library_view, name='library'),
 ]

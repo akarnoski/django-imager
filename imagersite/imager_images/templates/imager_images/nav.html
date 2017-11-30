@@ -1,22 +1,22 @@
           <ul class="navbar-nav ml-auto">
             {% if request.user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/profile"><i>Welcome,</i> {{ request.user.username }}</a>
+              <a class="nav-link js-scroll-trigger" href="/profile" style="color: gray"><i>Welcome,</i> {{ request.user.username }}</a>
             </li>
             {% endif %}
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/profile">Profile</a>
+              <a class="nav-link js-scroll-trigger" href="/profile" style="color: gray">Profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/images/library">Library</a>
+              <a class="nav-link js-scroll-trigger" href="/images/library" style="color: gray">Library</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#about">Albums</a>
+              <a class="nav-link js-scroll-trigger" href="#about" style="color: gray">Albums</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="{% url 'imager_images:photo' %}">Photos</a>
+              <a class="nav-link js-scroll-trigger" href="{% url 'imager_images:photo' %}" style="color: gray">Photos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/accounts/logout">Logout</a>
+              <a class="nav-link js-scroll-trigger" href="/accounts/logout" style="color: gray">Logout</a>
             </li>
           </ul>

@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 
 from imager_images.models import Album, ImagerProfile, Photo
-from imager_images.forms import PhotoUploadForm
+from django.forms import ModelChoiceField
 
 
 class AlbumView(ListView):
@@ -90,3 +90,8 @@ class PhotoCreate(CreateView):
         form.instance.user = form_user
         return super(PhotoCreate, self).form_valid(form)
 
+
+class AlbumCreate(CreateView):
+    model = Album
+    fields = ['photo', 'cover', 'title', 'description', 'published', 'date_published']
+    template_name_suffix = '_create_form'

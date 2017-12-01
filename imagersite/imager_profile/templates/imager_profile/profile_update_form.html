@@ -1,0 +1,10 @@
+{% extends 'imagersite/base.html' %}
+
+{% block nav %} {% include "imager_images/nav.html" %} {% endblock nav %}
+
+{% block content %}
+<form action="" method="post">{% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Update" />
+</form>
+{% endblock %}

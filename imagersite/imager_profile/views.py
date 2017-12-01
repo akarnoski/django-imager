@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 from imager_profile.models import ImagerProfile
 from imager_images.models import Photo
-from imager_images.forms import AlbumForm, DocumentForm
+
 
 
 def profile_view(request, username=None):

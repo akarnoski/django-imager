@@ -9,7 +9,6 @@ from imager_images.models import Photo
 from django.views.generic.edit import UpdateView
 
 
-
 def profile_view(request, username=None):
     if username is None and request.user.is_authenticated:
         request_user = User.objects.filter(username=request.user)
@@ -39,8 +38,6 @@ class ProfileUpdate(UpdateView):
     template_name_suffix = '_update_form'
     context_object_name = 'profile'
 
-    def get_context_data(self, **kwargs):
-        import pdb; pdb.set_trace()
-        profile = kwargs['object'].filter(user=kwargs['object'].pk)
-        context = super().get_context_data(**kwargs)
-        return context
+    def get_object(self):
+        return self.request.user.profile
+

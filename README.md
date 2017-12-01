@@ -53,6 +53,11 @@ http://localhost/8000
 | /login | login | Login for existing users |
 | /logout | logout | Logout for a logged in user |
 | /accounts/register | registration_register | Registration page for a new user |
+| /images | images | All public photos on app |
+| /images/album| album | All public albums on app |
+| /images/album/<pk> | albumphoto | All photos from one album |
+| /images/library | library | All photos and albums from one user |
+
 
 ## Built With:
 

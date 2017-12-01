@@ -12,6 +12,7 @@
             <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>
           </div>       
           <p>{{ profile.bio }}</p>
+          <a href="{% url 'imager_images:public_library' user=profile.user %}"><button id="sendMessageButton" class="btn btn-xl" type="submit">See My Photos</button></a>
         </div>
       </div>
     </header>

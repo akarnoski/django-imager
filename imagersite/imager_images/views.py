@@ -2,8 +2,12 @@ from django.shortcuts import render
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.views.generic import DetailView, ListView
+
 from django.views.generic.edit import CreateView
+
+from django.views.generic import DetailView, ListView, TemplateView
+from django.contrib.auth.models import User
+
 
 from imager_images.models import Album, ImagerProfile, Photo
 from imager_images.forms import PhotoUploadForm
@@ -18,8 +22,8 @@ class AlbumView(ListView):
 
     def get_queryset(self):
         """Request users profile."""
-        # user = ImagerProfile.objects.get(user=self.request.user)
-        # return Album.objects.filter(user=user)
+        user = ImagerProfile.objects.get(user=self.request.user)
+        return Album.objects.filter(user=user)
         return Album.objects.all()
 
 
@@ -39,8 +43,30 @@ class AlbumPhotoView(DetailView):
 
 def library_view(request):
     """Callable view for the libraaries."""
-    photos = Photo.objects.all().filter(published='PUBLIC').order_by('-date_uploaded')
-    return render(request, 'imager_images/library.html', context={'photos': photos})
+    user = ImagerProfile.objects.get(user=request.user)
+    albums = Album.objects.filter(user=user).order_by('-date_uploaded')
+    photos = Photo.objects.filter(user=user).order_by('-date_uploaded')
+    return render(request, 'imager_images/library.html',
+                  context={'photos': photos, 'albums': albums})
+
+
+class PublicLibrary(TemplateView):
+    """Display album for user."""
+    template_name = 'imager_images/library.html'
+
+    def get_context_data(self, **kwargs):
+        """Request users profile."""
+        # import pdb; pdb.set_trace()
+        name = User.objects.get(username=kwargs['user'])
+        user = ImagerProfile.objects.get(user=name)
+        albums = Album.objects.filter(user=user)\
+            .filter(published='PUBLIC').order_by('-date_uploaded')
+        photos = Photo.objects.filter(user=user)\
+            .filter(published='PUBLIC').order_by('-date_uploaded')
+        context = super().get_context_data(**kwargs)
+        context['photos'] = photos
+        context['albums'] = albums
+        return context
 
 
 class PhotoListView(ListView):

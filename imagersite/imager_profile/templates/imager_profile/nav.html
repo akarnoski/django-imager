@@ -1,11 +1,11 @@
           <ul class="navbar-nav ml-auto">
             {% if request.user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#"><i>Welcome,</i> {{ request.user.username }}</a>
+              <a class="nav-link js-scroll-trigger" href="{% url 'homepage' %}"><i>Welcome,</i> {{ request.user.username }}</a>
             </li>
             {% endif %}
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/profile">Profile</a>
+              <a class="nav-link js-scroll-trigger" href="{% url 'imager_profile:user_profile' %}">Profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="{% url 'imager_images:library' %}">Library</a>
@@ -17,6 +17,6 @@
               <a class="nav-link js-scroll-trigger" href="{% url 'imager_images:photo' %}">Photos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/accounts/logout">Logout</a>
+              <a class="nav-link js-scroll-trigger" href="{% url 'logout' %}">Logout</a>
             </li>
           </ul>

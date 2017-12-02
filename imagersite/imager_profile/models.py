@@ -25,11 +25,11 @@ class ImagerProfile(models.Model):
 
     objects = models.Manager()
     active = ProfileManager()
-    first_name = models.CharField(max_length=30, blank=False)
-    last_name = models.CharField(max_length=30, blank=False)
-    phone = models.CharField(max_length=12, blank=False)
-    website = models.URLField(blank=False)
-    location = models.CharField(max_length=30, blank=False)
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
+    phone = models.CharField(max_length=12, blank=True)
+    website = models.URLField(blank=True)
+    location = models.CharField(max_length=30, blank=True)
     fee = models.DecimalField(decimal_places=2, max_digits=6,
                               blank=True, null=True)
     CAMERAS = [

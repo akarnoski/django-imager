@@ -3,7 +3,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 from django.views.generic import DetailView, ListView, TemplateView
 from django.contrib.auth.models import User
@@ -82,7 +82,12 @@ class PhotoListView(ListView):
 
 class PhotoCreate(CreateView):
     model = Photo
-    fields = ['docfile', 'title', 'description', 'published', 'date_published']
+    fields = [
+        'docfile',
+        'title',
+        'description',
+        'published',
+        'date_published']
     template_name_suffix = '_create_form'
 
     def form_valid(self, form):
@@ -95,3 +100,19 @@ class AlbumCreate(CreateView):
     model = Album
     fields = ['photo', 'cover', 'title', 'description', 'published', 'date_published']
     template_name_suffix = '_create_form'
+
+
+class PhotoUpdate(UpdateView):
+    model = Photo
+    fields = [
+        'docfile',
+        'title',
+        'description',
+        'published',
+        'date_published']
+    template_name_suffix = '_update_form'
+    context_object_name = 'photo'
+
+    def get_object(self, queryset=None):
+        obj = Photo.objects.get(pk=self.kwargs['pk'])
+        return obj

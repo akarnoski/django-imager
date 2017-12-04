@@ -1,0 +1,23 @@
+{% extends 'imagersite/base.html' %}
+
+{% block content %}
+
+    <header class="masthead">
+      <div class="container">
+        <div class="intro-text">
+          <div class="intro-lead-in">Welcome To ImagerSite!</div>
+          <div class="intro-heading">
+            {% if request.user.is_authenticated %}
+                <h1>Hello, {{ request.user.username }}</h1>
+            {% endif %}</div>
+          <div class="register-form">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+              <input type="submit" value="Submit">
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
+{% endblock %}

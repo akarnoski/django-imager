@@ -3,8 +3,8 @@
 {% block nav %} {% include "imager_images/nav.html" %} {% endblock nav %}
 
 {% block content %}
-<form action="" method="post" >{% csrf_token %}
-    {{ form.as_table }}
+<form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+    {{ form }}
     <input type="submit" value="Save" />
 </form>
 {% endblock %}

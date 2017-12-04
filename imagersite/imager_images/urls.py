@@ -6,6 +6,7 @@ from imager_images.views import (
     AlbumPhotoView,
     PhotoListView,
     PhotoCreate,
+    PhotoUpdate,
     AlbumCreate,
     PublicLibrary)
 
@@ -15,6 +16,7 @@ from imager_images import views
 app_name = 'imager_images'
 urlpatterns = [
     url(r'^photos/add', PhotoCreate.as_view(success_url="images/library"), name='photoupload'),
+    url(r'^photos/(?P<pk>\d+)/edit', PhotoUpdate.as_view(success_url="images/library"), name='photoedit'),
     url(r'^album/add', AlbumCreate.as_view(), name='albumupload'),
     url(r'^album$', AlbumView.as_view(), name='album'),
     url(r'^album/(?P<pk>\d+)', AlbumPhotoView.as_view(), name='albumphoto'),

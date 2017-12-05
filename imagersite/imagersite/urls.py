@@ -21,7 +21,7 @@ from django.contrib.auth import views as auth_views
 
 from imagersite import views
 
-
+app_name = "imagersite"
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home_view, name='homepage'),

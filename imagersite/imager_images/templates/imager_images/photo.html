@@ -1,6 +1,6 @@
 {% extends 'imagersite/base.html' %}
 
-{% block nav %} {% include "imager_images/nav.html" %} {% endblock nav %}
+{% block nav %} {% include "imagersite/nav.html" %} {% endblock nav %}
 
 {% block content %}
   {% load static %}
@@ -59,6 +59,9 @@
                   <a href="/profile/{{ photo.user.user }}">{{ photo.user.user }}</a>
                   <ul class="list-inline">
                     <li>Upload Date: {{ photo.date_uploaded }}</li>
+                    {% if request.user == photo.user.user %}
+                    <li><a href="photos/{{ photo.id }}/edit">Edit</a></li>
+                    {% endif %}
                   </ul>
                 </div>
               </div>

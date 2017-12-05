@@ -141,11 +141,10 @@ class AlbumUpdate(UpdateView):
         'description',
         'published',
         'date_published']
-    template_name = 'album_update_form.html'
+    template_name = 'imager_images/album_update_form.html'
     context_object_name = 'album'
 
     def get_object(self, queryset=None):
         """Populate form."""
         obj = Album.objects.get(pk=self.kwargs['pk'])
         return obj
-        

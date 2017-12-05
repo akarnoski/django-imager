@@ -3,9 +3,15 @@
 {% block nav %} {% include "imager_images/nav.html" %} {% endblock nav %}
 
 {% block content %}
-<form action="" method="post" enctype="multipart/form-data">
+
+{% load static %}
+
+<form action="" method="post" style="margin-top: 100px;">
     {% csrf_token %}
-    {{ form.as_table }}
-    <input type="submit" value="Save" />
+
+    {{ form.as_p }}
+
+    <input type="submit" value="Update" />
 </form>
+
 {% endblock %}

@@ -1,17 +1,15 @@
+"""Views for images and albums."""
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from django.forms import ModelChoiceField
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
-
-from django.views.generic.edit import CreateView, UpdateView
-
 from django.views.generic import DetailView, ListView, TemplateView
-from django.contrib.auth.models import User
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 
 from imager_images.models import Album, ImagerProfile, Photo
-from django.forms import ModelChoiceField
 
 
 class AlbumView(ListView):
@@ -36,6 +34,7 @@ class AlbumPhotoView(DetailView):
     template_name = 'imager_images/albumphoto.html'
 
     def get_context_data(self, **kwargs):
+        """Queryset of all photos in album."""
         photo = kwargs['object'].photo.filter(album=kwargs['object'].pk)
         context = super().get_context_data(**kwargs)
         context['photo'] = photo
@@ -53,6 +52,7 @@ def library_view(request):
 
 class PublicLibrary(TemplateView):
     """Display album for user."""
+
     template_name = 'imager_images/library.html'
 
     def get_context_data(self, **kwargs):
@@ -72,16 +72,14 @@ class PublicLibrary(TemplateView):
 
 class PhotoListView(ListView):
     """Class to display the photo list view."""
+
     context_object_name = 'photos'
     template_name = 'imager_images/photo.html'
 
-    def get_queryset(self):
-        # profile = ImagerProfile.objects.get(user=self.request.user)
-        # return Photo.objects.filter(user=profile)
-        return Photo.objects.all().filter(published='PUBLIC').order_by('-date_uploaded')
-
 
 class PhotoCreate(CreateView):
+    """Add new photos view."""
+
     model = Photo
     fields = [
         'docfile',
@@ -92,18 +90,30 @@ class PhotoCreate(CreateView):
     template_name_suffix = '_create_form'
 
     def form_valid(self, form):
+        """Validate form."""
         form_user = ImagerProfile.objects.get(user=self.request.user)
         form.instance.user = form_user
         return super(PhotoCreate, self).form_valid(form)
 
 
 class AlbumCreate(CreateView):
+    """Create a new album view."""
+
     model = Album
-    fields = ['photo', 'cover', 'title', 'description', 'published', 'date_published']
+    fields = ['photo', 'cover', 'title', 'description',
+              'published', 'date_published']
     template_name_suffix = '_create_form'
+
+    def form_valid(self, form):
+        """Validate form."""
+        form_user = ImagerProfile.objects.get(user=self.request.user)
+        form.instance.user = form_user
+        return super(AlbumCreate, self).form_valid(form)
 
 
 class PhotoUpdate(UpdateView):
+    """Photo update view."""
+
     model = Photo
     fields = [
         'docfile',
@@ -115,5 +125,27 @@ class PhotoUpdate(UpdateView):
     context_object_name = 'photo'
 
     def get_object(self, queryset=None):
+        """Populate form."""
         obj = Photo.objects.get(pk=self.kwargs['pk'])
         return obj
+
+
+class AlbumUpdate(UpdateView):
+    """Album update view."""
+
+    model = Album
+    fields = [
+        'photo',
+        'cover',
+        'title',
+        'description',
+        'published',
+        'date_published']
+    template_name = 'album_update_form.html'
+    context_object_name = 'album'
+
+    def get_object(self, queryset=None):
+        """Populate form."""
+        obj = Album.objects.get(pk=self.kwargs['pk'])
+        return obj
+        

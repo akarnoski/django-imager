@@ -28,6 +28,10 @@ class Photo(models.Model):
         blank=True
     )
 
+    def __str__(self):
+        """Render as string."""
+        return self.title
+
 
 class Album(models.Model):
     """Create new album model."""
@@ -52,3 +56,7 @@ class Album(models.Model):
         choices=PUBLISHED,
         blank=True
     )
+
+    def __str__(self):
+        """Render as string."""
+        return self.title

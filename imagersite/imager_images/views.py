@@ -42,7 +42,7 @@ class AlbumPhotoView(DetailView):
 
 
 def library_view(request):
-    """Callable view for the libraaries."""
+    """Callable view for the libraries."""
     user = ImagerProfile.objects.get(user=request.user)
     albums = Album.objects.filter(user=user).order_by('-date_uploaded')
     photos = Photo.objects.filter(user=user).order_by('-date_uploaded')
@@ -75,12 +75,11 @@ class PhotoListView(ListView):
     template_name = 'imager_images/photo.html'
 
     def get_queryset(self):
-        # profile = ImagerProfile.objects.get(user=self.request.user)
-        # return Photo.objects.filter(user=profile)
         return Photo.objects.all().filter(published='PUBLIC').order_by('-date_uploaded')
 
 
 class PhotoCreate(CreateView):
+    """Class based view to display form for uploading new photos."""
     model = Photo
     fields = [
         'docfile',
@@ -97,12 +96,14 @@ class PhotoCreate(CreateView):
 
 
 class AlbumCreate(CreateView):
+    """Class based view to display form for creating new albums."""
     model = Album
     fields = ['photo', 'cover', 'title', 'description', 'published', 'date_published']
     template_name_suffix = '_create_form'
 
 
 class PhotoUpdate(UpdateView):
+    """Class based view to display form for updating and editing photos."""
     model = Photo
     fields = [
         'docfile',

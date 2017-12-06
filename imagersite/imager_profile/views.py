@@ -10,6 +10,7 @@ from django.views.generic.edit import UpdateView
 
 
 def profile_view(request, username=None):
+    """Request for profile view."""
     if username is None and request.user.is_authenticated:
         request_user = User.objects.filter(username=request.user)
         profile = ImagerProfile.objects.get(user=request_user)
@@ -23,6 +24,7 @@ def profile_view(request, username=None):
 
 
 class ProfileUpdate(UpdateView):
+    """Class based to view to generate for user to update profile."""
     model = ImagerProfile
     fields = [
         'first_name',

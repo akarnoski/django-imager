@@ -70,6 +70,15 @@ class ImagerProfile(models.Model):
         blank=True
     )
 
+    # class Meta:
+    #     """Set permissions on model."""
+
+    #     permissions = (
+    #         ("view_imagerprofile", "Can see books"),
+    #         ("view_albums", "Can see books"),
+    #         ("view_images", "Can see books"),
+    #     )
+
     @property
     def is_active(self):
         """Create property is_active for model."""

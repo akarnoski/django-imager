@@ -1,9 +1,8 @@
 """Views for imager profile."""
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.template import RequestContext
 from django.views.generic.edit import UpdateView
 
 from imager_images.models import Photo
@@ -11,6 +10,7 @@ from imager_images.models import Photo
 from imager_profile.models import ImagerProfile
 
 
+@login_required(login_url='/accounts/login/')
 def profile_view(request, username=None):
     """Profile view."""
     if username is None and request.user.is_authenticated:
@@ -28,7 +28,7 @@ def profile_view(request, username=None):
                                context={'profile': profile})
 
 
-class ProfileUpdate(UpdateView):
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
     """Update profile view."""
 
     model = ImagerProfile
@@ -45,13 +45,14 @@ class ProfileUpdate(UpdateView):
         'photo_styles']
     template_name_suffix = '_update_form'
     context_object_name = 'profile'
+    redirect_field_name = '/accounts/login'
 
     def get_object(self):
         """Populate form."""
         return self.request.user.profile
 
 
-class UserUpdate(UpdateView):
+class UserUpdate(LoginRequiredMixin, UpdateView):
     """Update user information view."""
 
     model = User
@@ -62,6 +63,7 @@ class UserUpdate(UpdateView):
     ]
     template_name = 'imager_profile/user_update_form.html'
     context_object_name = 'user'
+    redirect_field_name = '/accounts/login'
 
     def get_object(self):
         """Fill form data."""

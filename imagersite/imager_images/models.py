@@ -1,8 +1,11 @@
-from django.db import models
-from imager_profile.models import ImagerProfile
-from multiselectfield import MultiSelectField
+"""Models for images and albums."""
+from datetime import datetime
 
-# Create your models here.
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+from imager_profile.models import ImagerProfile
 
 
 class Photo(models.Model):
@@ -10,7 +13,8 @@ class Photo(models.Model):
 
     user = models.ForeignKey(
         ImagerProfile,
-        related_name='photo')
+        related_name='photo',
+        on_delete=models.CASCADE)
     docfile = models.ImageField(upload_to='images')
     title = models.CharField(max_length=30)
     description = models.TextField(blank=True)
@@ -38,7 +42,8 @@ class Album(models.Model):
 
     user = models.ForeignKey(
         ImagerProfile,
-        related_name='album')
+        related_name='album',
+        on_delete=models.CASCADE)
     photo = models.ManyToManyField(Photo)
     cover = models.ImageField(upload_to='cover-image')
     title = models.CharField(max_length=30, blank=False)
@@ -60,3 +65,19 @@ class Album(models.Model):
     def __str__(self):
         """Render as string."""
         return self.title
+
+
+@receiver(post_save, sender=Album)
+def change_album_publication_status(instance, **kwargs):
+    """Set publication date on albums."""
+    if not instance.date_published and instance.status == 'published':
+        instance.date_published = datetime.now()
+        instance.save()
+
+
+@receiver(post_save, sender=Photo)
+def change_photo_publication_status(instance, **kwargs):
+    """Set publication date on albums."""
+    if not instance.date_published and instance.status == 'published':
+        instance.date_published = datetime.now()
+        instance.save()

@@ -1,10 +1,8 @@
 """Views for images and albums."""
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
-from django.forms import ModelChoiceField
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.template import RequestContext
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 
@@ -12,12 +10,13 @@ from django.views.generic.edit import CreateView, UpdateView
 from imager_images.models import Album, ImagerProfile, Photo
 
 
-class AlbumView(ListView):
+class AlbumView(LoginRequiredMixin, ListView):
     """Display album for user."""
 
     model = Album
     context_object_name = 'albums'
     template_name = 'imager_images/album.html'
+    redirect_field_name = '/accounts/login'
 
     def get_queryset(self):
         """Request users profile."""
@@ -26,11 +25,12 @@ class AlbumView(ListView):
         return Album.objects.all()
 
 
-class AlbumPhotoView(DetailView):
+class AlbumPhotoView(LoginRequiredMixin, DetailView):
     """Display album for user."""
 
     model = Album
     context_object_name = 'photo'
+    redirect_field_name = '/accounts/login'
     template_name = 'imager_images/albumphoto.html'
 
     def get_context_data(self, **kwargs):
@@ -41,6 +41,7 @@ class AlbumPhotoView(DetailView):
         return context
 
 
+@login_required(login_url='/accounts/login')
 def library_view(request):
     """Callable view for the libraaries."""
     user = ImagerProfile.objects.get(user=request.user)
@@ -50,10 +51,11 @@ def library_view(request):
                   context={'photos': photos, 'albums': albums})
 
 
-class PublicLibrary(TemplateView):
+class PublicLibrary(LoginRequiredMixin, TemplateView):
     """Display album for user."""
 
     template_name = 'imager_images/library.html'
+    redirect_field_name = '/accounts/login'
 
     def get_context_data(self, **kwargs):
         """Request users profile."""
@@ -70,14 +72,15 @@ class PublicLibrary(TemplateView):
         return context
 
 
-class PhotoListView(ListView):
+class PhotoListView(LoginRequiredMixin, ListView):
     """Class to display the photo list view."""
 
     context_object_name = 'photos'
     template_name = 'imager_images/photo.html'
+    redirect_field_name = '/accounts/login'
 
 
-class PhotoCreate(CreateView):
+class PhotoCreate(LoginRequiredMixin, CreateView):
     """Add new photos view."""
 
     model = Photo
@@ -88,6 +91,7 @@ class PhotoCreate(CreateView):
         'published',
         'date_published']
     template_name_suffix = '_create_form'
+    redirect_field_name = '/accounts/login'
 
     def form_valid(self, form):
         """Validate form."""
@@ -96,13 +100,14 @@ class PhotoCreate(CreateView):
         return super(PhotoCreate, self).form_valid(form)
 
 
-class AlbumCreate(CreateView):
+class AlbumCreate(LoginRequiredMixin, CreateView):
     """Create a new album view."""
 
     model = Album
     fields = ['photo', 'cover', 'title', 'description',
               'published', 'date_published']
     template_name_suffix = '_create_form'
+    redirect_field_name = '/accounts/login'
 
     def form_valid(self, form):
         """Validate form."""
@@ -111,7 +116,7 @@ class AlbumCreate(CreateView):
         return super(AlbumCreate, self).form_valid(form)
 
 
-class PhotoUpdate(UpdateView):
+class PhotoUpdate(LoginRequiredMixin, UpdateView):
     """Photo update view."""
 
     model = Photo
@@ -123,6 +128,7 @@ class PhotoUpdate(UpdateView):
         'date_published']
     template_name_suffix = '_update_form'
     context_object_name = 'photo'
+    redirect_field_name = '/accounts/login'
 
     def get_object(self, queryset=None):
         """Populate form."""
@@ -130,7 +136,7 @@ class PhotoUpdate(UpdateView):
         return obj
 
 
-class AlbumUpdate(UpdateView):
+class AlbumUpdate(LoginRequiredMixin, UpdateView):
     """Album update view."""
 
     model = Album
@@ -143,6 +149,7 @@ class AlbumUpdate(UpdateView):
         'date_published']
     template_name = 'imager_images/album_update_form.html'
     context_object_name = 'album'
+    redirect_field_name = '/accounts/login'
 
     def get_object(self, queryset=None):
         """Populate form."""

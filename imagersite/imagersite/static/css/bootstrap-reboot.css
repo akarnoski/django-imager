@@ -354,3 +354,37 @@ template {
   text-align: right;
   padding-right: 30%;
 }
+
+.imager_forms{
+  padding-top: 7%;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+.imager_forms form{
+  list-style: none;
+}
+
+#id_services, #id_camera, #id_services, #id_photo_styles{
+  list-style: none;
+  text-align: left;
+}
+
+.imager_forms input{
+  display: block;
+}
+
+.imager_forms label{
+  display: block;
+}
+
+.none{
+  border-color: none;
+  border-radius: 0;
+  border-style: none;
+  border-width: 0;
+  padding: 0;
+  color: white;
+  background: none;
+  font-weight: 800;
+}

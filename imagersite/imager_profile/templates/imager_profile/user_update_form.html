@@ -1,11 +1,12 @@
 {% extends 'imagersite/base.html' %}
 
-{% block nav %} {% include "imager_images/nav.html" %} {% endblock nav %}
+{% block nav %} {% include "imagersite/nav.html" %} {% endblock nav %}
 
 {% block content %}
 
 {% load static %}
 
+<div class='imager_forms'>
 <form action="" method="post" style="margin-top: 100px;">
     {% csrf_token %}
 
@@ -13,5 +14,6 @@
 
     <input type="submit" value="Update" />
 </form>
+</div>
 
 {% endblock %}

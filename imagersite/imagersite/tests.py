@@ -1,4 +1,3 @@
-
 """Test module for imagersite."""
 from bs4 import BeautifulSoup as soup
 
@@ -72,7 +71,7 @@ class ViewTestCase(TestCase):
         )
         self.assertTemplateUsed(response, 'registration/login.html')
 
-    def test_logging_in_with_user_redirects_to_home(self):
+    def test_logging_in_with_user_redirects_to_profile(self):
         """Test login view has 200 status."""
         user = User(username='coyote', email='coyote@coyote.com')
         user.set_password('allthepasswords')
@@ -85,13 +84,13 @@ class ViewTestCase(TestCase):
             },
             follow=True
         )
-        self.assertTemplateUsed(response, 'imagersite/home.html')
+        self.assertTemplateUsed(response, 'imager_profile/profiles.html')
         self.assertContains(response, bytes(user.username, 'utf8'))
 
-    def test_logout_view_status_code_200(self):
+    def test_logout_view_status_code_302(self):
         """Test logout view has 200 status."""
         response = self.client.get(reverse_lazy('logout'))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     def test_register_view_status_code_200(self):
         """Test register view has 200 status."""

@@ -43,7 +43,7 @@ class AlbumPhotoView(LoginRequiredMixin, DetailView):
 
 @login_required(login_url='/accounts/login')
 def library_view(request):
-    """Callable view for the libraaries."""
+    """Callable view for the libraries."""
     user = ImagerProfile.objects.get(user=request.user)
     albums = Album.objects.filter(user=user).order_by('-date_uploaded')
     photos = Photo.objects.filter(user=user).order_by('-date_uploaded')
@@ -79,9 +79,14 @@ class PhotoListView(LoginRequiredMixin, ListView):
     template_name = 'imager_images/photo.html'
     redirect_field_name = '/accounts/login'
 
+    def get_queryset(self):
+        """Get all photos from user."""
+        return Photo.objects.all().filter(published='PUBLIC').\
+            order_by('-date_uploaded')
+
 
 class PhotoCreate(LoginRequiredMixin, CreateView):
-    """Add new photos view."""
+    """Class based view to display form for uploading new photos."""
 
     model = Photo
     fields = [
@@ -101,7 +106,7 @@ class PhotoCreate(LoginRequiredMixin, CreateView):
 
 
 class AlbumCreate(LoginRequiredMixin, CreateView):
-    """Create a new album view."""
+    """Class based view to display form for creating new albums."""
 
     model = Album
     fields = ['photo', 'cover', 'title', 'description',
@@ -117,7 +122,7 @@ class AlbumCreate(LoginRequiredMixin, CreateView):
 
 
 class PhotoUpdate(LoginRequiredMixin, UpdateView):
-    """Photo update view."""
+    """Class based view to display form for updating and editing photos."""
 
     model = Photo
     fields = [

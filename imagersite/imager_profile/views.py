@@ -12,7 +12,7 @@ from imager_profile.models import ImagerProfile
 
 @login_required(login_url='/accounts/login/')
 def profile_view(request, username=None):
-    """Profile view."""
+    """Request for profile view."""
     if username is None and request.user.is_authenticated:
         request_user = User.objects.filter(username=request.user)
         profile = ImagerProfile.objects.get(user=request_user)
@@ -29,7 +29,7 @@ def profile_view(request, username=None):
 
 
 class ProfileUpdate(LoginRequiredMixin, UpdateView):
-    """Update profile view."""
+    """Class based to view to generate for user to update profile."""
 
     model = ImagerProfile
     fields = [

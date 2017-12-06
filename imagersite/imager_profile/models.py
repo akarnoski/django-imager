@@ -79,6 +79,10 @@ class ImagerProfile(models.Model):
         """Make me a string."""
         return self.user.username
 
+    def __str__(self):
+        """Render name as string."""
+        return self.user.username
+
 
 @receiver(post_save, sender=User)
 def create_profile(sender, **kwargs):

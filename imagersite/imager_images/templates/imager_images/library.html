@@ -36,6 +36,9 @@
             <div class="portfolio-caption">
               <h4>{{ album.title }}</h4>
               <p class="text-muted">{{ album.description }}</p>
+               {% if request.user == album.user.user %}
+              <a href="album/{{ album.id }}/edit">Edit</a>
+              {% endif %}
             </div>
           </div>
 

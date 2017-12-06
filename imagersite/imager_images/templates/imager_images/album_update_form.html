@@ -1,11 +1,12 @@
 {% extends 'imagersite/base.html' %}
 
-{% block nav %} {% include "imagersite/nav.html" %} {% endblock nav %}
+{% block nav %} {% include "imagersite/nav.html" %} 
+{% endblock nav %}
 
 {% block content %}
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_table }}
+    {{ form.as_p }}
     <input type="submit" value="Save" />
 </form>
 {% endblock %}

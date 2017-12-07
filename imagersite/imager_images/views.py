@@ -20,8 +20,6 @@ class AlbumView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         """Request users profile."""
-        user = ImagerProfile.objects.get(user=self.request.user)
-        return Album.objects.filter(user=user)
         return Album.objects.all()
 
 

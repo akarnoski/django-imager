@@ -1,7 +1,5 @@
 """Urls for imager images."""
-from django.conf import settings
-from django.conf.urls import include, url
-from django.conf.urls.static import static
+from django.conf.urls import url
 
 from imager_images import views
 from imager_images.views import (
@@ -16,6 +14,7 @@ from imager_images.views import (
 
 
 app_name = 'imager_images'
+
 urlpatterns = [
     url(r'^photos/add', PhotoCreate.as_view(success_url="images/library"),
         name='photoupload'),

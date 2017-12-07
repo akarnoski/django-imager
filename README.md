@@ -1,4 +1,4 @@
-(https://travis-ci.org/adriennekarnoski/django-imager.svg?branch=front-end-4)
+![build](https://travis-ci.org/adriennekarnoski/django-imager.svg?branch=front-end-4)
 # ImagerSite
 
 **Authors**: [Mark Reynoso](https://github.com/markreynoso), [Adrienne Karnoski](https://github.com/adriennekarnoski)

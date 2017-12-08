@@ -1,8 +1,15 @@
 language: python
 python:
-  - "2.7"
   - "3.6"
+
+notifications:
+  email: false
+
+service:
+  - postgresql
+
+before_script:
+  - psql -c "create database imagersite;" -U postgres
+
 install:
-  - pip install .
   - pip install -r requirements.txt
-script: py.test

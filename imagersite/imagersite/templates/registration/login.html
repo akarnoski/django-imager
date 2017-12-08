@@ -1,0 +1,24 @@
+{% extends 'imagersite/base.html' %}
+
+
+{% block content %}
+<header class="masthead">
+      <div class="container">
+        <div class="intro-text">
+          <div class="intro-lead-in">Welcome To ImagerSite!</div>
+          <div class="intro-heading">
+            {% if request.user.is_authenticated %}
+                <h1>Hello, {{ request.user.username }}</h1>
+            {% endif %}</div>
+            <h2>Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <a class="btn btn-xl js-scroll-trigger" ><button class='none' type="submit">Login</button></a>
+            </form>
+            <hr>
+           <a class="btn btn-xl js-scroll-trigger" href="/accounts/register">Register</a>\
+        </div>
+      </div>
+    </header>
+{% endblock %}

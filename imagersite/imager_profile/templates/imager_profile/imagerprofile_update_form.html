@@ -1,0 +1,59 @@
+{% extends 'imagersite/base.html' %}
+
+{% block nav %} {% include "imagersite/nav.html" %} {% endblock nav %}
+
+{% block content %}
+
+{% load static %}
+
+<div class='imager_forms' >
+<form action="" method="post" style="margin-top: 100px;">{% csrf_token %}
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="team-member">
+                    {{ form.first_name.label_tag }} 
+                    {{ form.first_name }}
+
+                    {{ form.last_name.label_tag }}
+                    {{ form.last_name }}
+
+                    {{ form.phone.label_tag }}
+                    {{ form.phone }}
+
+                    {{ form.website.label_tag }}
+                    {{ form.website }}
+
+                    {{ form.location.label_tag }}
+                    {{ form.location }}
+
+                    {{ form.fee.label_tag }}
+                    {{ form.fee }}
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="team-member">
+                    
+
+                    {{ form.services.label_tag }}
+                    {{ form.services }}
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="team-member">
+                    {{ form.camera.label_tag }}
+                    {{ form.camera }}
+
+                    {{ form.photo_styles.label_tag }}
+                    {{ form.photo_styles }}
+                </div>
+            </div>
+        </div>
+
+            {{ form.bio.label_tag }}
+            {{ form.bio }}
+
+    <input type="submit" value="Update" />
+</form>
+</div>
+
+{% endblock %}

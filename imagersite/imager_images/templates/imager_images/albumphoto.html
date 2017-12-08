@@ -1,0 +1,90 @@
+{% extends 'imagersite/base.html' %}
+
+{% block nav %} {% include "imagersite/nav.html" %} {% endblock nav %}
+
+{% block content %}
+
+    <header class="masthead">
+      <div class="container">
+        <div class="intro-text">
+          <div class="intro-lead-in">Photo Album</div>
+          <div class="intro-heading">
+                <h1>all the pictures you can handle</h1>
+          </div>       
+        </div>
+      </div>
+    </header>
+    <!-- Portfolio Grid -->
+    <section class="bg-light" id="portfolio">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+          </div>
+        </div>
+        <div class="row">
+
+{# template for each library album #}
+
+{% for img in photo %}
+
+
+          <div class="col-md-4 col-sm-6 portfolio-item">
+            <a class="portfolio-link" data-toggle="modal" href="#image_{{ img.id }}">
+              <div class="portfolio-hover">
+                <div class="portfolio-hover-content">
+                  <i class="fa fa-plus fa-3x"></i>
+                </div>
+              </div>
+              {% load static %}
+                <img class="img-fluid" src="{{ img.docfile.url }}" alt="My image"/>
+            </a>
+            <div class="portfolio-caption">
+              <h4>{{ img.title }}</h4>
+              <p class="text-muted">{{ img.description }}</p>
+            </div>
+          </div>
+
+{% endfor %}
+
+        </div>
+      </div>
+    </section>
+
+{% for img in photo %}
+
+          <div class="portfolio-modal modal fade" id="image_{{ img.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                  <div class="lr">
+                    <div class="rl"></div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                      <div class="modal-body">
+                        <!-- Project Details Go Here -->
+                        <h2>{{ img.title }}</h2>
+                        <p class="item-intro text-muted">{{ img.date_uploaded }}</p>
+                          <img class="img-fluid d-block mx-auto" src="{{ img.docfile.url }}" alt="My image"/>
+                        <!-- <img class="img-fluid d-block mx-auto" src="img/portfolio/06-full.jpg" alt=""> -->
+                        <p>{{ img.description }}</p>
+                        <ul class="list-inline">
+                          <li>{{ img.user.user.username }}</li>
+                        </ul>
+                        <button class="btn btn-primary" data-dismiss="modal" type="button">
+                          <i class="fa fa-times"></i>
+                          Return to Album</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+{% endfor %}
+
+
+{% endblock %}

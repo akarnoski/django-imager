@@ -44,7 +44,7 @@ class Album(models.Model):
         ImagerProfile,
         related_name='album',
         on_delete=models.CASCADE)
-    photo = models.ManyToManyField(Photo)
+    photo = models.ManyToManyField(Photo, related_name='album')
     cover = models.ImageField(upload_to='cover-image')
     title = models.CharField(max_length=30, blank=False)
     description = models.TextField(blank=True)

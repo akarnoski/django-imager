@@ -70,6 +70,14 @@ TEMPLATES = [
     },
 ]
 
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=imager_profile,imager_images,imagersite',
+]
+
 WSGI_APPLICATION = 'imagersite.wsgi.application'
 
 LOGIN_REDIRECT_URL = '/profile'

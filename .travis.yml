@@ -9,7 +9,7 @@ service:
   - postgresql
 
 env:
-  - DATABASE_NAME='imagersite' SECRET_KEY='potato' DATABASE_HOST='127.0.0.1' DATABASE_USER='postgres'
+  - DB_NAME='imagersite' SECRET_KEY='potato' DB_HOST='127.0.0.1' DB_USER='postgres'
 
 before_script:
   - psql -c "create database imagersite;" -U postgres

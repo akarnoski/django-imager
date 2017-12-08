@@ -70,6 +70,14 @@ TEMPLATES = [
     },
 ]
 
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=imager_profile,imager_images,imagersite',
+]
+
 WSGI_APPLICATION = 'imagersite.wsgi.application'
 
 LOGIN_REDIRECT_URL = '/profile'
@@ -131,8 +139,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT=587
+EMAIL_HOST_USER = 'imagerproject@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ.get('GMAIL_PASSWORD')
+DEFAULT_EMAIL_FROM = 'imagerproject@gmail.com'
+
 STATIC_URL = '/static/'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')

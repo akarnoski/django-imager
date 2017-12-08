@@ -15,4 +15,4 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - python django_imager/manage.py migrate
+  - python imagersite/manage.py migrate

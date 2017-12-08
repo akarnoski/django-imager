@@ -106,3 +106,7 @@ package-lock.json
 
 MEDIA
 !MEDIA/.gitkeep
+
+
+# ansible
+ansible-aws/

@@ -19,4 +19,4 @@ install:
 
 script:
   - python imagersite/manage.py migrate
-  - ./manage.py test
+  - python imagersite/manage.py test

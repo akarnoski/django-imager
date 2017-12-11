@@ -26,17 +26,16 @@
     - name: Create a virtual environment in the imager app repo
       command: python3 -m venv /home/ubuntu/imagersite/ENV
 
-    # - name: Install all requirements for virtual environment
-    #   pip: 
-    #     virtualenv=/home/ubuntu/imagersite/ENV
-    #     name={{ item }}
-    #     with_items:
-    #     - nginx
-    #     - python3
-    #     - python3-pip
-    #     - python3.4-venv
-    #     - git
-    #     - gunicorn
+    - name: Install all requirements for virtual environment
+      pip: 
+        virtualenv=/home/ubuntu/imagersite/ENV
+        name={{ item }}
+        with_items:
+        - nginx
+        - django
+        - django-registration
+        - psycopg2
+        - gunicorn
 
     - name: Copy upstart script into /etc/init
       template: src=../templates/upstart_config dest=/etc/init/imagersite.conf

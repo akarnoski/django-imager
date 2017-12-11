@@ -144,7 +144,8 @@ EMAIL_HOST='smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT=587
 EMAIL_HOST_USER = 'imager1project@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ.get('GMAIL_PASSWORD')
+# EMAIL_HOST_PASSWORD = os.environ.get('GMAIL_PASSWORD')
+EMAIL_HOST_PASSWORD = 'potatoes'
 DEFAULT_FROM_EMAIL = 'imager1project@gmail.com'
 SERVER_EMAIL = 'imager1project@gmail.com'
 

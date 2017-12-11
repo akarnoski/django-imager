@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'imager_profile',
     'imager_images',
-    'imagersite'
+    'imager_api',
+    'imagersite',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +70,22 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=imager_profile,imager_images,imagersite',
 ]
 
 WSGI_APPLICATION = 'imagersite.wsgi.application'
@@ -131,8 +149,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'imagerproject@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ.get('GMAIL_PASSWORD')
+DEFAULT_EMAIL_FROM = 'imagerproject@gmail.com'
+
 STATIC_URL = '/static/'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')

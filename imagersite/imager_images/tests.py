@@ -1,18 +1,20 @@
 """Tests for image and albums."""
+import os
 from datetime import datetime
 
 from bs4 import BeautifulSoup as soup
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import Client, RequestFactory, TestCase
+from django.test import Client, TestCase
 from django.urls import reverse_lazy
 
 import factory
 
 from imager_images.models import Album, Photo
 
-from imager_profile.models import ImagerProfile
+MEDIA_ROOT = settings.MEDIA_ROOT
 
 
 class UserGenerator(factory.django.DjangoModelFactory):
@@ -87,8 +89,17 @@ class PhotoandAlbumTests(TestCase):
             album.user = self.user[-1].profile
             photo.save()
             album.save()
+            photo.album.add(album)
+            album.save()
             self.photo.append(photo)
             self.album.append(album)
+
+    def tearDown(self):
+        """Add tear down procedures."""
+        del_photos = os.path.join(MEDIA_ROOT, 'images', 'header-bg*.jpg')
+        del_cover = os.path.join(MEDIA_ROOT, 'cover-image', 'map-imag*.jpg')
+        os.system('rm -rf ' + del_photos)
+        os.system('rm -rf ' + del_cover)
 
     def test_user_is_active(self):
         """Test that user has been created."""
@@ -256,7 +267,136 @@ class PhotoandAlbumTests(TestCase):
             },
             follow=True
         )
-        self.client.get(reverse_lazy('imager_images:albumphoto'))
-        import pdb; pdb.set_trace()
-        self.assertEqual(str(Photo.objects.filter(user=user.profile)[0].user),
-                         user.username)
+        response = self.client.get(reverse_lazy('imager_images:albumphoto',
+                                                kwargs={'pk': user.id}))
+        html = soup(response.content, 'html.parser')
+        description = html.find('li')
+        self.assertIsNotNone(description)
+        self.assertEqual(description.text.strip(), str(user.username))
+
+    def test_add_photo_view(self):
+        """Test add photo."""
+        user = self.user[1]
+        user.set_password('letmeinplease')
+        user.save()
+        self.client.post(
+            reverse_lazy('login'),
+            {
+                'username': user.username,
+                'password': 'letmeinplease'
+            },
+            follow=True
+        )
+        photo = SimpleUploadedFile(
+            name='header-bg.jpg',
+            content=open('imagersite/static/img/header-bg.jpg', 'rb').read(),
+            content_type='image/png'
+        )
+        add_photo = {
+            'docfile': photo,
+            'title': 'photo',
+            'description': 'test photo',
+            'published': 'PUBLIC',
+            'date_published': '12/7/17'
+        }
+        response = self.client.post(
+            reverse_lazy('imager_images:photoupload'),
+            add_photo,
+            follow=True
+        )
+        html = soup(response.content, 'html.parser')
+        description = html.find('ul', {'class': 'list-inline'}).find('li')
+        self.assertIsNotNone(description)
+        self.assertTrue('Upload Date: Dec. 7, 2017', description.text)
+
+    def test_add_album_view(self):
+        """Test add album."""
+        user = self.user[1]
+        user.set_password('letmeinplease')
+        user.save()
+        self.client.post(
+            reverse_lazy('login'),
+            {
+                'username': user.username,
+                'password': 'letmeinplease'
+            },
+            follow=True
+        )
+        photo = SimpleUploadedFile(
+            name='header-bg.jpg',
+            content=open('imagersite/static/img/header-bg.jpg', 'rb').read(),
+            content_type='image/png'
+        )
+        add_photo = {
+            'cover': photo,
+            'title': 'album',
+            'description': 'an album',
+            'published': 'PUBLIC',
+            'date_published': '12/7/17'
+        }
+        response = self.client.post(
+            reverse_lazy('imager_images:albumupload'),
+            add_photo,
+            follow=True
+        )
+        html = soup(response.content, 'html.parser')
+        description = html.find('ul', {'class': 'list-inline'}).find('li')
+        self.assertIsNotNone(description)
+        self.assertTrue('Upload Date: Dec. 7, 2017', description.text)
+
+    def test_edit_photo_view(self):
+        """Test edit photo view."""
+        user = self.user[1]
+        user.set_password('letmeinplease')
+        user.save()
+        self.client.post(
+            reverse_lazy('login'),
+            {
+                'username': user.username,
+                'password': 'letmeinplease'
+            },
+            follow=True
+        )
+        add_photo = {
+            'docfile': 'imagersite/static/img/header-bg.jpg',
+            'title': 'photo_edit',
+            'description': 'test photo',
+            'published': 'PUBLIC',
+            'date_published': '12/7/17'
+        }
+        response = self.client.post(
+            reverse_lazy('imager_images:photoedit',
+                         kwargs={'pk': user.id}),
+            add_photo,
+            follow=True
+        )
+        html = soup(response.content, 'html.parser')
+        self.assertTrue('test photo' in html.text)
+
+    def test_edit_album_view(self):
+        """Test edit photo view."""
+        user = self.user[1]
+        user.set_password('letmeinplease')
+        user.save()
+        self.client.post(
+            reverse_lazy('login'),
+            {
+                'username': user.username,
+                'password': 'letmeinplease'
+            },
+            follow=True
+        )
+        add_photo = {
+            'title': 'album',
+            'description': 'test album',
+            'published': 'PUBLIC',
+            'date_published': '12/7/17'
+        }
+        response = self.client.post(
+            reverse_lazy('imager_images:albumedit',
+                         kwargs={'pk': user.id}),
+            add_photo,
+            follow=True
+        )
+        html = soup(response.content, 'html.parser')
+        self.assertTrue('test album' in html.text)

@@ -26,16 +26,14 @@
     - name: Create a virtual environment in the imager app repo
       command: python3 -m venv /home/ubuntu/imagersite/ENV
 
-    - name: Install all requirements for virtual environment
-      pip: 
-        virtualenv=/home/ubuntu/imagersite/ENV
-        name={{ item }}
-        with_items:
-        - nginx
-        - django
-        - django-registration
-        - psycopg2
-        - gunicorn
+    - name: Install gunicorn to the virtualenv
+      pip: virtualenv=/home/ubuntu/imagersite name=gunicorn
+
+    - name: Create a new default file for nginx
+      template: src=../templates/nginx_config.jinja2 dest=/etc/nginx/sites-available/default
+
+    - name: Restart nginx service
+      service: name=nginx state=restarted
 
     - name: Copy upstart script into /etc/init
       template: src=../templates/upstart_config dest=/etc/init/imagersite.conf

@@ -29,6 +29,9 @@
     - name: Install gunicorn to the virtualenv
       pip: virtualenv=/home/ubuntu/imagersite name=gunicorn
 
+    - name: Install django to the virtualenv
+      pip: virtualenv=/home/ubuntu/imagersite name=django
+
     - name: Create a new default file for nginx
       template: src=../templates/nginx_config.jinja2 dest=/etc/nginx/sites-available/default
 

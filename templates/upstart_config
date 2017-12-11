@@ -9,4 +9,4 @@ setgid nogroup
 
 chdir /home/ubuntu/imagersite/imagersite
 
-exec /home/ubuntu/imagersite/imagersite/bin/gunicorn -b :8000 imagersite.wsgi
+exec /home/ubuntu/imagersite/bin/gunicorn -b :8000 imagersite.wsgi

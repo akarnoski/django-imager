@@ -143,9 +143,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT=587
-EMAIL_HOST_USER = 'imagerproject@gmail.com'
+EMAIL_HOST_USER = 'imager1project@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ.get('GMAIL_PASSWORD')
-DEFAULT_EMAIL_FROM = 'imagerproject@gmail.com'
+DEFAULT_FROM_EMAIL = 'imager1project@gmail.com'
+SERVER_EMAIL = 'imager1project@gmail.com'
 
 STATIC_URL = '/static/'
 

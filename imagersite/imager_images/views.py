@@ -62,11 +62,17 @@ def library_view(request):
     albums = Album.objects.filter(user=user).order_by('-date_uploaded')
     photos = Photo.objects.filter(user=user).order_by('-date_uploaded')
     this_page = request.GET.get("page", 1)
-
     photo_pages = Paginator(photos, 4)
     album_pages = Paginator(albums, 4)
-    photos = photo_pages.page(this_page)
-    albums = album_pages.page(this_page)
+    try:
+        photos = photo_pages.page(this_page)
+        albums = album_pages.page(this_page)
+    except PageNotAnInteger:
+        photos = photo_pages.page(1)
+        albums = album_pages.page(1)
+    except EmptyPage:
+        photos = photo_pages.page(photo_pages.num_pages)
+        albums = album_pages.page(album_pages.num_pages)
     return render(request, 'imager_images/library.html',
                   context={'photos': photos, 'albums': albums})
 

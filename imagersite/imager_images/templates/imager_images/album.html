@@ -51,14 +51,15 @@
 
         </div>
       </div>
+      <div style="text-align: center;">
+        {% for page_num in paginator.page_range %}
+          {% if page_num == page_obj.number %}
+            <a href="?page={{ page_num }}" style="color: gray">{{ page_num }}</a>
+          {% else %}
+            <a href="?page={{ page_num }}">{{ page_num }}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
     </section>
-
-<nav>
-    <ul>
-    {% for page_num in paginator.page_range %}
-        <li><a href="?page={{ page_num }}">Page {{ page_num }}</a></li>
-    {% endfor %}
-    </ul>
-</nav>
 
 {% endblock %}

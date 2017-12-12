@@ -1,13 +1,20 @@
 """Views for images and albums."""
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.contrib.auth.models import User
+from imager_images.models import Album, ImagerProfile, Photo
+
 from django.shortcuts import render
+
+from django.core.paginator import Paginator
+from django.core.paginator import EmptyPage
+from django.core.paginator import PageNotAnInteger
+
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 
 
-from imager_images.models import Album, ImagerProfile, Photo
 
 
 class AlbumView(LoginRequiredMixin, ListView):
@@ -17,6 +24,7 @@ class AlbumView(LoginRequiredMixin, ListView):
     context_object_name = 'albums'
     template_name = 'imager_images/album.html'
     redirect_field_name = '/accounts/login'
+    paginate_by = 4
 
     def get_queryset(self):
         """Request users profile."""
@@ -35,6 +43,14 @@ class AlbumPhotoView(LoginRequiredMixin, DetailView):
         """Queryset of all photos in album."""
         photo = kwargs['object'].photo.filter(album=kwargs['object'].pk)
         context = super().get_context_data(**kwargs)
+        this_page = self.request.GET.get("page", 1)
+        pages = Paginator(photo, 4)
+        try:
+            photo = pages.page(this_page)
+        except PageNotAnInteger:
+            photo = pages.page(1)
+        except EmptyPage:
+            photo = pages.page(pages.num_pages)
         context['photo'] = photo
         return context
 
@@ -45,6 +61,12 @@ def library_view(request):
     user = ImagerProfile.objects.get(user=request.user)
     albums = Album.objects.filter(user=user).order_by('-date_uploaded')
     photos = Photo.objects.filter(user=user).order_by('-date_uploaded')
+    this_page = request.GET.get("page", 1)
+
+    photo_pages = Paginator(photos, 4)
+    album_pages = Paginator(albums, 4)
+    photos = photo_pages.page(this_page)
+    albums = album_pages.page(this_page)
     return render(request, 'imager_images/library.html',
                   context={'photos': photos, 'albums': albums})
 
@@ -76,6 +98,7 @@ class PhotoListView(LoginRequiredMixin, ListView):
     context_object_name = 'photos'
     template_name = 'imager_images/photo.html'
     redirect_field_name = '/accounts/login'
+    paginate_by = 4
 
     def get_queryset(self):
         """Get all photos from user."""

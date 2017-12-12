@@ -69,4 +69,12 @@
     </div>
     {% endfor %} 
 
+<nav>
+    <ul>
+    {% for page_num in paginator.page_range %}
+        <li><a href="?page={{ page_num }}">Page {{ page_num }}</a></li>
+    {% endfor %}
+    </ul>
+</nav>
+
 {% endblock %}

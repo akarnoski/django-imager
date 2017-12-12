@@ -43,7 +43,13 @@
           </div>
 
 {% endfor %}
-        
+  <nav>
+    <ul>
+    {% for page_num in albums.paginator.page_range %}
+        <li><a href="?page={{ page_num }}">Page {{ page_num }}</a></li>
+    {% endfor %}
+    </ul>
+  </nav>
         <hr>          
         </div>
         <div class="row">
@@ -106,5 +112,11 @@
       </div>
     </div>
 {% endfor %} 
-
+<nav>
+    <ul>
+    {% for page_num in photos.paginator.page_range %}
+        <li><a href="?page={{ page_num }}">Page {{ page_num }}</a></li>
+    {% endfor %}
+    </ul>
+  </nav>
 {% endblock %}

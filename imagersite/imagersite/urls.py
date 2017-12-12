@@ -30,7 +30,5 @@ urlpatterns = [
     url(r'^profile/', include('imager_profile.urls')),
     url(r'^login/', auth_views.login, name='login'),
     url(r'^logout/', auth_views.logout, name='logout'),
-    url(r'^api-auth/', include('rest_framework.urls',
-                               namespace='rest_framework')),
-    url(r'^api/', include('imager_api.urls')),
+    url(r'^api/v1/', include('imager_api.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

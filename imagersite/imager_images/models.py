@@ -7,6 +7,10 @@ from django.dispatch import receiver
 
 from imager_profile.models import ImagerProfile
 
+from pygments import highlight
+from pygments.formatters.html import HtmlFormatter
+from pygments.lexers import get_lexer_by_name
+
 
 class Photo(models.Model):
     """Create new photo model."""
@@ -15,6 +19,7 @@ class Photo(models.Model):
         ImagerProfile,
         related_name='photo',
         on_delete=models.CASCADE)
+    highlighted = models.TextField(null=True)
     docfile = models.ImageField(upload_to='images')
     title = models.CharField(max_length=30)
     description = models.TextField(blank=True)

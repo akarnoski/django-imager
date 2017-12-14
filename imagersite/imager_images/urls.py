@@ -1,5 +1,6 @@
 """Urls for imager images."""
 from django.conf.urls import url
+from django.urls import reverse_lazy
 
 from imager_images import views
 from imager_images.views import (
@@ -16,7 +17,7 @@ from imager_images.views import (
 app_name = 'imager_images'
 
 urlpatterns = [
-    url(r'^photos/add/$', PhotoCreate.as_view(success_url="images/library"),
+    url(r'^photos/add/$', PhotoCreate.as_view(success_url="../../../images/library"),
         name='photoupload'),
     url(r'^photos/(?P<pk>\d+)/edit',
         PhotoUpdate.as_view(success_url="images/library"), name='photoedit'),
